@@ -16,6 +16,7 @@
   <a href="#"><img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite" alt="Vite"></a>
   <a href="#"><img src="https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS"></a>
   <a href="#"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Status-WIP-orange.svg" alt="Work in Progress"></a>
   <a href="https://app.netlify.com/start/deploy?repository=https://github.com/AlexKovax/app-cine-next"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 </p>
 
@@ -33,6 +34,20 @@
 - 📊 **Logs détaillés** - Suivez chaque appel API (Jina, OpenRouter, cache) pour debug
 - 🎨 **Design Brutaliste** - Interface unique avec Tailwind CSS
 - 🏠 **Configuration locale** - Tout est stocké dans votre navigateur (localStorage)
+
+---
+
+## ⚠️ Statut du projet
+
+**🚧 Work in Progress** - Ce projet est en cours de développement actif.
+
+L'extraction des séances via IA fonctionne mais n'est pas encore parfaite :
+- Certaines séances peuvent ne pas apparaître
+- Le parsing dépend de la qualité du markdown retourné par Jina AI
+- Les formats de page AlloCiné peuvent varier selon les cinémas
+- Les logs sont disponibles pour debugger les problèmes
+
+**Contribuez !** Si vous rencontrez des problèmes, consultez les logs et ouvrez une issue avec les détails.
 
 ---
 

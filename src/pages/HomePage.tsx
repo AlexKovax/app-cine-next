@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { CinemaCard } from '../components/CinemaCard';
+import { WorkInProgressBanner } from '../components/WorkInProgressBanner';
 import { fetchShowtimes } from '../services/showtimes';
 import { useCache } from '../hooks/useCache';
 import type { Config, Cinema, CinemaResult, CinemaLoadingState } from '../types';
@@ -125,6 +126,8 @@ export function HomePage({ config }: HomePageProps) {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <WorkInProgressBanner />
+      
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-black">Séances à venir</h1>
