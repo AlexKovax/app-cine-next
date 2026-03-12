@@ -1,47 +1,153 @@
-# CinéNext
+<p align="center">
+  <img src="public/cine-next.png" alt="CinéNext Screenshot" width="800">
+</p>
 
-Application React + TypeScript + Vite pour récupérer les séances de cinéma à venir (dans les 30 prochaines minutes) depuis des pages AlloCiné.
+<h1 align="center">🎬 CinéNext</h1>
 
-## Fonctionnalités
+<p align="center">
+  <strong>Ne manquez plus jamais une séance de cinéma !</strong><br>
+  Une application React qui récupère automatiquement les films projetés dans les 30 prochaines minutes.<br>
+  <em>Design brutaliste, extraction IA, et open source.</em>
+</p>
 
-- **Récupération automatique** des séances depuis les pages AlloCiné de vos cinémas favoris
-- **Extraction IA** via OpenRouter (modèle Claude) pour parser le HTML
-- **Cache local** configurable pour éviter les appels API répétés
-- **Logs détaillés** de tous les appels (Jina AI, OpenRouter, cache)
-- **Interface brutalisme** avec Tailwind CSS
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React 19"></a>
+  <a href="#"><img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript" alt="TypeScript"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite" alt="Vite"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS"></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/AlexKovax/app-cine-next"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+</p>
 
-## Architecture
+---
 
-### Stack technique
-- **Framework** : React 19 + TypeScript
-- **Build** : Vite 7
-- **Styling** : Tailwind CSS 4
-- **Linting** : ESLint 9
+## ✨ Fonctionnalités
 
-### Structure du projet
+- 🤖 **Extraction IA** - Utilise OpenRouter (Claude) pour parser les pages AlloCiné
+- ⚡ **Récupération instantanée** - Affiche uniquement les séances dans les 30 prochaines minutes
+- 💾 **Cache intelligent** - Évite les appels API répétés avec une durée configurable
+- 📊 **Logs détaillés** - Suivez chaque appel API (Jina, OpenRouter, cache) pour debug
+- 🎨 **Design Brutaliste** - Interface unique avec Tailwind CSS
+- 🏠 **Configuration locale** - Tout est stocké dans votre navigateur (localStorage)
+
+---
+
+## 🚀 Démarrage rapide
+
+```bash
+# Cloner le repo
+git clone https://github.com/AlexKovax/app-cine-next.git
+cd app-cine-next
+
+# Installer les dépendances
+npm install
+
+# Lancer en développement
+npm run dev
+```
+
+Puis ouvrez `http://dev.hosakka.studio:5173` (ou `localhost:5173`)
+
+---
+
+## 🚀 Déploiement
+
+### Déployer sur Netlify (recommandé)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AlexKovax/app-cine-next)
+
+Ou manuellement :
+
+1. Fork ce repo sur GitHub
+2. Connectez votre repo à [Netlify](https://netlify.com)
+3. La config `netlify.toml` est déjà prête :
+   - Build command : `npm run build`
+   - Publish directory : `dist`
+   - SPA redirects configurés
+4. Déployez !
+
+### Déploiement manuel
+
+```bash
+# Build pour production
+npm run build
+
+# Le dossier dist/ contient les fichiers statiques
+# Déployez-le sur n'importe quel hébergeur statique
+```
+
+---
+
+## 🔧 Configuration
+
+### 1. Clé API OpenRouter
+- Créez un compte sur [openrouter.ai](https://openrouter.ai)
+- Générez une clé API gratuite
+- Collez-la dans l'onglet **Configuration**
+
+### 2. Ajoutez vos cinémas
+- Trouvez l'URL AlloCiné de votre cinéma
+- Format : `https://www.allocine.fr/seance/salle_gen_csalle=[CODE].html`
+- Exemples :
+  - MK2 Beaubourg : `C0071`
+  - UGC Ciné Cité Les Halles : `C0159`
+
+### 3. Profitez !
+Cliquez sur **"Récupérer les séances"** et voyez les films à venir dans les 30 prochaines minutes.
+
+---
+
+## 🏗️ Architecture
+
 ```
 src/
-├── App.tsx                    # Point d'entrée, navigation entre pages
-├── main.tsx                   # Bootstrap React
-├── types/index.ts             # Types TypeScript (Cinema, Showtime, Config...)
-├── pages/
-│   ├── HomePage.tsx           # Page principale - liste des séances
-│   ├── ConfigurationPage.tsx  # Gestion config (API key, cinémas, cache)
-│   └── LogsPage.tsx           # Visualisation des logs
-├── components/
-│   ├── Navigation.tsx         # Barre de navigation
-│   ├── CinemaCard.tsx         # Carte d'affichage d'un cinéma + ses séances
-│   ├── CinemaList.tsx         # Liste des cinémas configurés
-│   └── ApiKeyInput.tsx        # Input pour la clé API
-├── hooks/
-│   ├── useConfig.ts           # Gestion de la config (localStorage)
-│   └── useCache.ts            # Gestion du cache (localStorage)
-└── services/
-    ├── showtimes.ts           # Logique de récupération des séances
-    └── logging.ts             # Service de logging
+├── pages/          # Home, Configuration, Logs
+├── components/     # UI components (Navigation, CinemaCard...)
+├── hooks/          # useConfig, useCache (localStorage)
+├── services/       # showtimes.ts (logique IA), logging.ts
+└── types/          # Types TypeScript
 ```
 
-## Flux de données
+### Stack technique
+- **React 19** + **TypeScript** - Pour une app robuste et moderne
+- **Vite 7** - Build ultra-rapide
+- **Tailwind CSS 4** - Styling utility-first
+- **OpenRouter** - API LLM (Claude Haiku)
+- **Jina AI** - Extraction HTML → Markdown
+
+---
+
+## 🤝 Contribuer
+
+Les contributions sont les bienvenues ! Que ce soit pour :
+- 🐛 Reporter un bug
+- 💡 Proposer une nouvelle fonctionnalité  
+- 🔧 Améliorer le code
+- 🌍 Ajouter d'autres sources que AlloCiné
+- 📱 Créer une version mobile/PWA
+
+N'hésitez pas à ouvrir une issue ou une pull request !
+
+---
+
+## 📝 Licence
+
+MIT License - Voir [LICENSE](LICENSE) pour plus de détails.
+
+---
+
+<p align="center">
+  Fait avec ❤️ et 🍿 par <a href="https://github.com/AlexKovax">AlexKovax</a>
+</p>
+
+---
+
+## Documentation technique
+
+<details>
+<summary>📖 Cliquez pour voir la documentation détaillée</summary>
+
+### Flux de données
 
 1. **HomePage** appelle `fetchShowtimes(cinema, config)`
 2. **showtimes.ts** :
@@ -52,87 +158,35 @@ src/
 3. **useCache** met en cache les résultats dans localStorage
 4. **Logs** enregistrent tous les appels pour debugging
 
-## Configuration requise
-
-### 1. Clé API OpenRouter
-- Créer un compte sur [openrouter.ai](https://openrouter.ai)
-- Générer une clé API
-- La configurer dans l'onglet "Configuration"
-
-### 2. Cinémas
-- Ajouter des cinémas avec leur URL AlloCiné
-- Format attendu : `https://www.allocine.fr/seance/salle_gen_csalle=[CODE].html`
-
-Exemples :
-- MK2 Beaubourg : `https://www.allocine.fr/seance/salle_gen_csalle=C0071.html`
-- UGC Ciné Cité Les Halles : `https://www.allocine.fr/seance/salle_gen_csalle=C0159.html`
-
-### 3. Cache
-- Durée configurable (défaut: 15 minutes)
-- Évite les appels API répétés pour les mêmes données
-
-## Scripts disponibles
-
-```bash
-# Développement (accessible sur dev.hosakka.studio)
-npm run dev
-
-# Build production
-npm run build
-
-# Linting
-npm run lint
-
-# Preview build
-npm run preview
-```
-
-## Déploiement
-
-L'application est configurée pour fonctionner sur `dev.hosakka.studio` (voir `vite.config.ts`) :
-```ts
-server: {
-  host: '0.0.0.0',
-  allowedHosts: ['dev.hosakka.studio'],
-}
-```
-
-## Points clés du code
-
-### Extraction des séances (`services/showtimes.ts`)
-- Utilise Jina AI pour convertir les pages HTML en markdown
-- Envoie le markdown à OpenRouter (Claude) avec un prompt spécifique
-- Parse la réponse JSON pour extraire les séances
-- Filtre côté client pour ne garder que les séances dans les 30 prochaines minutes
-
 ### Configuration persistante (`hooks/useConfig.ts`)
+
 - Stockée dans localStorage sous la clé `cinenext-config`
 - Contient : apiKey, cinemas, cacheDurationMinutes
 - Les modèles IA sont hardcodés (`anthropic/claude-haiku-4.5`)
 
 ### Cache (`hooks/useCache.ts`)
+
 - Clé : `cinenext-cache-{cinemaId}`
 - TTL configurable (en minutes)
 - Stocke markdown + showtimes + timestamp
 
 ### Logs (`services/logging.ts`)
+
 - Stockés dans localStorage sous `cinenext-logs`
 - Maximum 100 entrées
 - Niveaux : info, success, error, warning
 - Services : jina, openrouter, cache, app
 
-## Modèles IA utilisés
+### Scripts disponibles
 
-Actuellement : `anthropic/claude-haiku-4.5`
+```bash
+npm run dev      # Développement
+npm run build    # Build production
+npm run lint     # ESLint
+npm run preview  # Preview build
+```
 
-Le prompt système est conçu pour extraire :
-- Titre du film
-- Horaire (HH:MM)
-- Salle (optionnel)
-- Version VF/VO/3D (optionnel)
-- URL AlloCiné du film
-
-## Améliorations possibles
+### Améliorations possibles
 
 - [ ] Ajouter d'autres sources que AlloCiné
 - [ ] Support multi-modèles avec fallback
@@ -141,8 +195,4 @@ Le prompt système est conçu pour extraire :
 - [ ] Mode offline avec PWA
 - [ ] Tests unitaires (Jest/Vitest)
 
-## Notes de développement
-
-- L'application utilise des événements custom (`navigate`, `navigate-to-logs`) pour la navigation
-- Les styles utilisent une approche "brutaliste" (bordures épaisses, ombres dures)
-- Le parsing des horaires est fait côté client comme sécurité supplémentaire
+</details>
