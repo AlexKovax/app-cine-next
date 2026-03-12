@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import type { Config, Cinema } from '../types';
 
 const STORAGE_KEY = 'cinenext-config';
@@ -14,27 +14,28 @@ const DEFAULT_CONFIG: Config = {
   cacheDurationMinutes: 15,
 };
 
-export function useConfig() {
-  const [config, setConfig] = useState<Config>(DEFAULT_CONFIG);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setConfig({
-          ...DEFAULT_CONFIG,
-          ...parsed,
-          models: DEFAULT_MODELS, // Toujours utiliser le modèle par défaut
-          cacheDurationMinutes: parsed.cacheDurationMinutes || 15,
-        });
-      }
-    } catch (error) {
-      console.error('Failed to load config:', error);
+function loadConfigFromStorage(): Config {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return {
+        ...DEFAULT_CONFIG,
+        ...parsed,
+        models: DEFAULT_MODELS,
+        cacheDurationMinutes: parsed.cacheDurationMinutes || 15,
+      };
     }
-    setIsLoaded(true);
-  }, []);
+  } catch (error) {
+    console.error('Failed to load config:', error);
+  }
+  return DEFAULT_CONFIG;
+}
+
+export function useConfig() {
+  const [config, setConfig] = useState<Config>(loadConfigFromStorage);
+  // isLoaded is true immediately since we initialize from localStorage synchronously
+  const isLoaded = true;
 
   const saveConfig = useCallback((newConfig: Config) => {
     try {

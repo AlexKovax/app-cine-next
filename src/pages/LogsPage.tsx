@@ -1,12 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { getLogs, clearLogs, exportLogs, type LogEntry, type LogLevel } from '../services/logging';
 
 type FilterService = 'all' | LogEntry['service'];
 type FilterLevel = 'all' | LogLevel;
 
+function loadLogsFromStorage(): LogEntry[] {
+  return getLogs();
+}
+
 export function LogsPage() {
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [filteredLogs, setFilteredLogs] = useState<LogEntry[]>([]);
+  const [logs, setLogs] = useState<LogEntry[]>(loadLogsFromStorage);
   const [selectedLog, setSelectedLog] = useState<LogEntry | null>(null);
   const [serviceFilter, setServiceFilter] = useState<FilterService>('all');
   const [levelFilter, setLevelFilter] = useState<FilterLevel>('all');
@@ -18,11 +21,7 @@ export function LogsPage() {
     setLogs(allLogs);
   }, []);
 
-  useEffect(() => {
-    loadLogs();
-  }, [loadLogs]);
-
-  useEffect(() => {
+  const filteredLogs = useMemo(() => {
     let filtered = logs;
 
     if (serviceFilter !== 'all') {
@@ -42,7 +41,7 @@ export function LogsPage() {
       );
     }
 
-    setFilteredLogs(filtered);
+    return filtered;
   }, [logs, serviceFilter, levelFilter, searchTerm]);
 
   useEffect(() => {
