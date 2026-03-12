@@ -19,6 +19,10 @@
   <a href="https://app.netlify.com/start/deploy?repository=https://github.com/AlexKovax/app-cine-next"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 </p>
 
+<p align="center">
+  <a href="https://app-cine-next.netlify.app/" target="_blank"><strong>🚀 Essayer la démo en ligne</strong></a>
+</p>
+
 ---
 
 ## ✨ Fonctionnalités
@@ -52,7 +56,14 @@ Puis ouvrez `http://dev.hosakka.studio:5173` (ou `localhost:5173`)
 
 ## 🚀 Déploiement
 
-### Déployer sur Netlify (recommandé)
+### Démo en ligne
+
+🎬 **L'application est déjà déployée et accessible ici :**
+**[https://app-cine-next.netlify.app/](https://app-cine-next.netlify.app/)**
+
+Pour tester, il suffit de configurer votre clé API OpenRouter et d'ajouter un cinéma !
+
+### Déployer votre propre instance sur Netlify
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AlexKovax/app-cine-next)
 
